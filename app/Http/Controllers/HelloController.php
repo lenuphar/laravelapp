@@ -3,19 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class HelloController extends Controller
 {
-    public function index($id = 'xxx', $pass = 'yyy') {
-        return <<<EOF
+    public function index(Request $request, Response $response) {
+
+        $html = <<<EOF
         <html>
         <body>
-        <h1>
-        Hello, Laravel From HelloController!
-        </h1>
-        <p>IDは{$id}、PASSは{$pass}です。
+        <h3>
+        Request
+        </h3>
+        <pre>
+        {$request}
+        </pre>
+
+        <h3>
+        Response
+        </h3>
+        <pre>
+        {$response}
+        </pre>
         </body>
         </html>
         EOF;
+
+        $response->setContent($html);
+        return $response;
     }
+
+
 }
